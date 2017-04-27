@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Madge.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="WinSCP_HostName_FieldID" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">197674</Value>
+    </Setting>
+    <Setting Name="WinSCP_Username_FieldID" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">132160</Value>
+    </Setting>
+    <Setting Name="WinSCP_AdvancedButton_FieldID" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">263194</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
