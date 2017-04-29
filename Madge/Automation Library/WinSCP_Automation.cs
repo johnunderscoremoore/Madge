@@ -1,4 +1,5 @@
-﻿using Madge.UIAutomation;
+﻿using Madge.Sensory_Input;
+using Madge.UIAutomation;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -25,26 +26,10 @@ namespace Madge.Automation_Library
             //Uncomment if you need to start a new process
             //_WinSCPProcess = Process.Start("WinSCP.exe");
 
-            int ct = 0;
-            do
-            {
-            _WinSCPAutomationElement = AutomationElement.RootElement.FindFirst
-            (TreeScope.Children, new PropertyCondition(AutomationElement.NameProperty,
-            "Login - WinSCP"));
+            //Instantiate custom UIAutomation functions
+            var uiAutomator = new UIAutomation.UIAutomation_Functions();
 
-                ++ct;
-                Thread.Sleep(100);
-            }
-            while (_WinSCPAutomationElement == null && ct < 50);
-
-
-            if (_WinSCPAutomationElement == null)
-            {
-                throw new InvalidOperationException("WinSCP must be running");
-            }
-
-            AutomationElement _resultTextBoxAutomationElement = _WinSCPAutomationElement.FindFirst(TreeScope.Descendants, new PropertyCondition
-            (AutomationElement.AutomationIdProperty, Properties.Settings.Default.WinSCP_HostName_FieldID.ToString()));
+            AutomationElement _resultTextBoxAutomationElement = uiAutomator.GetElementbyID("Login - WinSCP",Properties.Settings.Default.WinSCP_HostName_FieldID.ToString());
 
             if (_resultTextBoxAutomationElement == null)
             {
@@ -78,17 +63,43 @@ namespace Madge.Automation_Library
         }
         public string addNote()
         {
+            //Ask user if they want to add a note, politely!
+            Console.WriteLine("I think you might be trying to add a note. Would you like assistance? (y/n)");
+            string respondIndicator = Console.ReadLine();
+
+            var languageIntepreter = new Language_Interpreter();
+
+            //check if response was affirmative. If not, exit (and eventually log the event to a database)
+            if (languageIntepreter.CheckForAffirmative(respondIndicator) == false)
+            {
+                return "Looks like I was wrong. Sorry.";
+            }
+            
+            //Prompt user for what they want to put into the notes, in a semi-uniform fashion.
+            Console.WriteLine("What's the title of your note?");
+            Console.WriteLine("");
+            string noteText = "Title: " + Console.ReadLine();
+            Console.WriteLine("Describe the note.");
+            Console.WriteLine("");
+            noteText += System.Environment.NewLine + "Description: " + Console.ReadLine();
+
             //Instantiate custom UIAutomation functions
             var uiAutomator = new UIAutomation.UIAutomation_Functions();
 
-            //Get Automation Element for Username field
+            //Get Automation Element for Advanced Settings button
             AutomationElement advancedButton = uiAutomator.GetElementbyID("Login - WinSCP", Properties.Settings.Default.WinSCP_AdvancedButton_FieldID.ToString());
 
             System.Windows.Point p = advancedButton.GetClickablePoint();
-
+            //Click the button where it lays!
             SetCursorPosition(p.X, p.Y);
             MouseEvent(MouseEventFlags.LeftDown);
             MouseEvent(MouseEventFlags.LeftUp);
+            
+            //Move to Notes section and paste. This could be done using UIAutomation, but I'm not there yet...
+            uiAutomator.sendKeysToApp("N");
+            uiAutomator.sendKeysToApp("{TAB}");
+            uiAutomator.sendKeysToApp(noteText);
+
             return "Clickety clack";
         }
         public AutomationElement GetFunctionButton(string functionName)

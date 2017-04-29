@@ -57,6 +57,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Sensory Input\Event_Memory.cs" />
+    <Compile Include="Sensory Input\Language_Interpreter.cs" />
     <Compile Include="Sensory Input\Monitor.cs" />
     <Compile Include="UIAutomation\UIAutomation_Functions.cs" />
   </ItemGroup>

@@ -143,6 +143,14 @@ namespace Madge.UIAutomation
                 
             }
         }
+        public void sendKeysToApp(string keySequence)
+        {
+
+            SendKeys.SendWait(keySequence);
+            Thread.Sleep(100);
+
+        }
+
         public AutomationElement GetElementbyID(string winText, string fieldID)
         {
             int ct = 0;
@@ -159,21 +167,26 @@ namespace Madge.UIAutomation
 
 
             if (_AutomationElement == null)
+        
             {
-                throw new InvalidOperationException("Application is not running");
+                //No controls visible matching that ID
+                return null;
             }
 
+            //Create automation element, converting hex value to int
             AutomationElement _resultAutomationElement = _AutomationElement.FindFirst(TreeScope.Descendants, new PropertyCondition
-            (AutomationElement.AutomationIdProperty, fieldID));
+            (AutomationElement.AutomationIdProperty, int.Parse(fieldID, System.Globalization.NumberStyles.HexNumber).ToString()));
 
             if (_resultAutomationElement == null)
             {
-                throw new InvalidOperationException("Could not find element by id");
+                //No controls visible matching that ID
+                return null;
             }
 
             return _resultAutomationElement;
 
         }
+
         public static void SetCursorPosition(double X, double Y)
         {
             //convert to int before sending to system

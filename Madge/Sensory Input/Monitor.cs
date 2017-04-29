@@ -23,6 +23,10 @@ namespace Madge.Sensory_Input
                 { "00002", "Login - WinSCP", Properties.Settings.Default.WinSCP_HostName_FieldID.ToString(), "(username)", "Madge.Automation_Library.WinSCP_Automation", "SetUsername", "" },
                 { "00003", "Login - WinSCP", Properties.Settings.Default.WinSCP_HostName_FieldID.ToString(), "(add note)", "Madge.Automation_Library.WinSCP_Automation", "addNote", "" }
             };
+
+            //Instantiate custom UIAutomation functions
+            var uiAutomator = new UIAutomation.UIAutomation_Functions();
+
             //infinite loop
             bool x = true;
             do
@@ -30,21 +34,17 @@ namespace Madge.Sensory_Input
                 //for each node, check fields
                 for (int i = 0; i < fieldValueActions.GetLength(0); i += 1)
                 {
-                    //find application window, main parent
-                    applicationElement = AutomationElement.RootElement.FindFirst
-                    (TreeScope.Children, new PropertyCondition(AutomationElement.NameProperty,
-                    fieldValueActions[i, 1]));
 
-                    if (applicationElement == null)
-                    {
-                        //throw new InvalidOperationException("Calculator must be running");
-                    }
 
-                    AutomationElement fieldElement = applicationElement.FindFirst(TreeScope.Descendants, new PropertyCondition
-                    (AutomationElement.AutomationIdProperty, fieldValueActions[i, 2]));
+                    //Get Automation Element for Advanced Settings button
+                    AutomationElement fieldElement = uiAutomator.GetElementbyID(fieldValueActions[i, 1], fieldValueActions[i, 2]);
+
 
                     if (fieldElement == null)
                     {
+                        //control not found, exit for
+                        break;
+
                         throw new InvalidOperationException("Could not find result box");
                     }
 

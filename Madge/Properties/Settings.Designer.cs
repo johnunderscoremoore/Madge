@@ -25,7 +25,7 @@ namespace Madge.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("197674")]
+        [global::System.Configuration.DefaultSettingValueAttribute("00050438")]
         public string WinSCP_HostName_FieldID {
             get {
                 return ((string)(this["WinSCP_HostName_FieldID"]));
@@ -34,7 +34,7 @@ namespace Madge.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("132160")]
+        [global::System.Configuration.DefaultSettingValueAttribute("00070564")]
         public string WinSCP_Username_FieldID {
             get {
                 return ((string)(this["WinSCP_Username_FieldID"]));
@@ -43,7 +43,7 @@ namespace Madge.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("263194")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0006043E")]
         public string WinSCP_AdvancedButton_FieldID {
             get {
                 return ((string)(this["WinSCP_AdvancedButton_FieldID"]));

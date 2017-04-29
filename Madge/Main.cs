@@ -16,8 +16,6 @@ namespace Madge
 
         static void Main(string[] args)
         {
-            //winscpAuto = new WinSCP_Automation();
-            //winscpAuto.Calculator();
             //begin monitor execution
             monitor = new Monitor();
 
